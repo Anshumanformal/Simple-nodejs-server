@@ -8,7 +8,6 @@ app.use(express.urlencoded({ extended: true }));
 
 const port = 3000
 
-
 const INTEGRATION_NAME = {
     PERFIOS : 'Perfios',
     HUNTER : 'Hunter',
