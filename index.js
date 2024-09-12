@@ -18,8 +18,12 @@ const INTEGRATION_NAME = {
   }
 
 app.get('/', (req, res) => {
-    sendEmail();
     res.send('Server is OK')
+})
+
+app.get('/send-email', (req, res) => {
+    sendEmail();
+    res.send('Send Email function called successfully')
 })
 
 app.get('/fetch-cloudwatch-logs', (req, res) => {

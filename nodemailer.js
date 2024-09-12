@@ -1,16 +1,4 @@
 const nodemailer = require('nodemailer');
-const readline = require('readline');
-
-// Create an interface for user input
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-// Function to get user input
-const getUserInput = (query) => {
-    return new Promise((resolve) => rl.question(query, resolve));
-};
 
 // Main function to send email
 module.exports.sendEmail = async () => {
@@ -18,8 +6,8 @@ module.exports.sendEmail = async () => {
 
         const integration_name = "Perfios"
         const product_name = "PL"
-        const statusCode = "200"
-        const timeStamp = "9/10/2024, 6:03:11 PM" + " IST"
+        const statusCode = "500"
+        const timeStamp = new Date().toLocaleString() + " IST"
         const transaction_id = "a953656d-2592-f55f-67a5-1054dd1bf056"
         const senderEmail =  "anshumanranjan1998@gmail.com"
         const recipient_name = senderEmail.split('@')[0].trim() || "USER"
@@ -27,9 +15,7 @@ module.exports.sendEmail = async () => {
 
         const senderPassword = "kcxc pegg cvlt thlv"
         const recipientEmail = "anshuman.ranjan@in.ey.com,jasmeen.1@in.ey.com"
-        // const emailSubject = await getUserInput("Enter email subject: ");
         const emailSubject = `Alert Notification for ${integration_name}`
-        // const emailMessage = await getUserInput("Enter email message: ");
         const emailMessage = `
 
         <p>Dear ${recipient_name},</p>
@@ -50,7 +36,6 @@ module.exports.sendEmail = async () => {
         <p>${sender_name}</p>
         
         `
-
 
         // Create a transporter object
         let transporter = nodemailer.createTransport({
