@@ -27,8 +27,8 @@ module.exports.fetchCloudwatchLogs = () => {
 
 // Configure the region (make sure to replace 'us-east-1' with your correct region)
 AWS.config.update({
-  accessKeyId: "AKIAYCRX2VFI7HWWQ45Y",
-  secretAccessKey: "59BkJeow6fHWtyee+FZDq25ZnMxiROv6B/jlDnRu",
+  accessKeyId: "",
+  secretAccessKey: "",
   region: "us-east-1",
 });
 
