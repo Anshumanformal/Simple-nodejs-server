@@ -1,10 +1,18 @@
 const express = require('express')
 const app = express()
+const perfiosRouter = require('./routes/perfiosRouter')
+const dmsRouter = require('./routes/dmsRouter')
 const {sendEmail} = require("./nodemailer")
 const {fetchCloudwatchLogs} = require('./fetchCloudwatchLogs')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Global Error Handling Middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 const port = 3000
 
@@ -15,7 +23,8 @@ const INTEGRATION_NAME = {
     CIBIL : 'Cibil',
     DMS : 'Dms',
     NO_INTEGRATION_NAME : 'no-integration-name'
-  }
+}
+
 
 app.get('/', (req, res) => {
     res.send('Server is OK')
@@ -33,41 +42,56 @@ app.get('/fetch-cloudwatch-logs', (req, res) => {
 })
 
 app.post('/submit-response', (req, res) => {
-    console.log('Response: ', req.body)
+    console.log('submit-response API called...')
     if(req.body.status === 'success')
-        res.send('Request executed successfully')
+        res.json({
+            "statusCode": "200",
+            "api_name": "submit-response",
+            "message": "Request executed successfully"
+        })
     
     else if(req.body.status === 'fail')
-        res.send('Request failed')
-
-    else res.send('Unknown request')
-})
-
-app.post('/perfios', (req, res) => {
-    console.log('Perfios API called...')
-    if(req.body.statusCode){
-        if(req.body.eventName === INTEGRATION_NAME.PERFIOS){
-            res.json({
-                "eventName" : INTEGRATION_NAME.PERFIOS,
-                "statusCode" : req.body.statusCode,
-                "message" : "OK"
-            })
-        }
-        else {
-            res.json({
-                "eventName" : INTEGRATION_NAME.PERFIOS,
-                "statusCode" : req.body.statusCode,
-                "message" : "eventName is not Perfios"
-            })
-        }
-    }
-    else
         res.json({
-            "eventName" : INTEGRATION_NAME.PERFIOS,
-            "statusCode" : "400",
-            "message" : "statusCode not provided"
+            "statusCode": "400",
+            "api_name": "submit-response",
+            "message": "Request failed"
         })
+
+    else res.json({
+        "statusCode": "400",
+        "api_name": "submit-response",
+        "message": "Unknown request"
+    })
 })
+
+app.use('/perfios', perfiosRouter)
+app.use('/dms', dmsRouter)
+
+// app.post('/perfios', (req, res) => {
+//     console.log('Perfios API called...')
+//     if(req.body.statusCode){
+//         if(req.body.eventName === INTEGRATION_NAME.PERFIOS){
+//             res.json({
+//                 "eventName" : INTEGRATION_NAME.PERFIOS,
+//                 "statusCode" : req.body.statusCode,
+//                 "message" : "OK"
+//             })
+//         }
+//         else {
+//             res.json({
+//                 "eventName" : INTEGRATION_NAME.PERFIOS,
+//                 "statusCode" : req.body.statusCode,
+//                 "message" : "eventName is not Perfios"
+//             })
+//         }
+//     }
+//     else
+//         res.json({
+//             "eventName" : INTEGRATION_NAME.PERFIOS,
+//             "statusCode" : "400",
+//             "message" : "statusCode not provided"
+//         })
+// })
 
 
 app.post('/hunter', (req, res) => {
@@ -148,31 +172,31 @@ app.post('/cibil', (req, res) => {
         })
 })
 
-app.post('/dms', (req, res) => {
-    console.log('DMS API called...')
-    if(req.body.statusCode){
-        if(req.body.eventName === INTEGRATION_NAME.DMS){
-            res.json({
-                "eventName" : INTEGRATION_NAME.DMS,
-                "statusCode" : req.body.statusCode,
-                "message" : "OK"
-            })
-        }
-        else {
-            res.json({
-                "eventName" : INTEGRATION_NAME.DMS,
-                "statusCode" : req.body.statusCode,
-                "message" : "eventName is not Dms"
-            })
-        }
-    }
-    else
-        res.json({
-            "eventName" : INTEGRATION_NAME.DMS,
-            "statusCode" : "400",
-            "message" : "statusCode not provided"
-        })
-})
+// app.post('/dms', (req, res) => {
+//     console.log('DMS API called...')
+//     if(req.body.statusCode){
+//         if(req.body.eventName === INTEGRATION_NAME.DMS){
+//             res.json({
+//                 "eventName" : INTEGRATION_NAME.DMS,
+//                 "statusCode" : req.body.statusCode,
+//                 "message" : "OK"
+//             })
+//         }
+//         else {
+//             res.json({
+//                 "eventName" : INTEGRATION_NAME.DMS,
+//                 "statusCode" : req.body.statusCode,
+//                 "message" : "eventName is not Dms"
+//             })
+//         }
+//     }
+//     else
+//         res.json({
+//             "eventName" : INTEGRATION_NAME.DMS,
+//             "statusCode" : "400",
+//             "message" : "statusCode not provided"
+//         })
+// })
 
 app.post('/no-integration-name', (req, res) => {
     console.log('No-integration-name API called...')
