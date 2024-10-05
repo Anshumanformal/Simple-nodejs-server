@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 // Global Error Handling Middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).send('Global Error in server!');
 });
 
 const port = 3000
@@ -24,7 +24,6 @@ const INTEGRATION_NAME = {
     DMS : 'Dms',
     NO_INTEGRATION_NAME : 'no-integration-name'
 }
-
 
 app.get('/', (req, res) => {
     res.send('Server is OK')
