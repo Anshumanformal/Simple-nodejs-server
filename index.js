@@ -66,160 +66,131 @@ app.post('/submit-response', (req, res) => {
 app.use('/perfios', perfiosRouter)
 app.use('/dms', dmsRouter)
 
-// app.post('/perfios', (req, res) => {
-//     console.log('Perfios API called...')
-//     if(req.body.statusCode){
-//         if(req.body.eventName === INTEGRATION_NAME.PERFIOS){
-//             res.json({
-//                 "eventName" : INTEGRATION_NAME.PERFIOS,
-//                 "statusCode" : req.body.statusCode,
-//                 "message" : "OK"
-//             })
-//         }
-//         else {
-//             res.json({
-//                 "eventName" : INTEGRATION_NAME.PERFIOS,
-//                 "statusCode" : req.body.statusCode,
-//                 "message" : "eventName is not Perfios"
-//             })
-//         }
-//     }
-//     else
-//         res.json({
-//             "eventName" : INTEGRATION_NAME.PERFIOS,
-//             "statusCode" : "400",
-//             "message" : "statusCode not provided"
-//         })
-// })
-
-
 app.post('/hunter', (req, res) => {
     console.log('Hunter API called...')
     if(req.body.statusCode){
-        if(req.body.eventName === INTEGRATION_NAME.HUNTER){
+        if(req.body.integration_name === INTEGRATION_NAME.HUNTER){
             res.json({
-                "eventName" : INTEGRATION_NAME.HUNTER,
+                "integration_name" : INTEGRATION_NAME.HUNTER,
+                "api_name" : "hunter",
                 "statusCode" : req.body.statusCode,
-                "message" : "OK"
+                "message" : "OK",
+                "data" : []
             })
         }
         else {
             res.json({
-                "eventName" : INTEGRATION_NAME.HUNTER,
+                "integration_name" : INTEGRATION_NAME.HUNTER,
+                "api_name" : "hunter",
                 "statusCode" : req.body.statusCode,
-                "message" : "eventName is not Hunter"
+                "message" : "integration_name is not Hunter",
+                "data" : []
             })
         }
     }
     else
         res.json({
-            "eventName" : INTEGRATION_NAME.HUNTER,
+            "integration_name" : INTEGRATION_NAME.HUNTER,
+            "api_name" : "hunter",
             "statusCode" : "400",
-            "message" : "statusCode not provided"
+            "message" : "statusCode not provided",
+            "data" : []
         })
 })
 
 app.post('/posidex', (req, res) => {
     console.log('Posidex API called...')
     if(req.body.statusCode){
-        if(req.body.eventName === INTEGRATION_NAME.POSIDEX){
+        if(req.body.integration_name === INTEGRATION_NAME.POSIDEX){
             res.json({
-                "eventName" : INTEGRATION_NAME.POSIDEX,
+                "integration_name" : INTEGRATION_NAME.POSIDEX,
+                "api_name" : "posidex",
                 "statusCode" : req.body.statusCode,
-                "message" : "OK"
+                "message" : "OK",
+                "data" : []
             })
         }
         else {
             res.json({
-                "eventName" : INTEGRATION_NAME.POSIDEX,
+                "integration_name" : INTEGRATION_NAME.POSIDEX,
+                "api_name" : "posidex",
                 "statusCode" : req.body.statusCode,
-                "message" : "eventName is not Posidex"
+                "message" : "integration_name is not Posidex",
+                "data" : []
             })
         }
     }
     else
         res.json({
-            "eventName" : INTEGRATION_NAME.POSIDEX,
+            "integration_name" : INTEGRATION_NAME.POSIDEX,
+            "api_name" : "posidex",
             "statusCode" : "400",
-            "message" : "statusCode not provided"
+            "message" : "statusCode not provided",
+            "data" : []
         })
 })
 
 app.post('/cibil', (req, res) => {
     console.log('Cibil API called...')
     if(req.body.statusCode){
-        if(req.body.eventName === INTEGRATION_NAME.CIBIL){
+        if(req.body.integration_name === INTEGRATION_NAME.CIBIL){
             res.json({
-                "eventName" : INTEGRATION_NAME.CIBIL,
+                "integration_name" : INTEGRATION_NAME.CIBIL,
+                "api_name" : "cibil",
                 "statusCode" : req.body.statusCode,
-                "message" : "OK"
+                "message" : "OK",
+                "data" : []
             })
         }
         else {
             res.json({
-                "eventName" : INTEGRATION_NAME.CIBIL,
+                "integration_name" : INTEGRATION_NAME.CIBIL,
+                "api_name" : "cibil",
                 "statusCode" : req.body.statusCode,
-                "message" : "eventName is not Cibil"
+                "message" : "integration_name is not Cibil",
+                "data" : []
             })
         }
     }
     else
         res.json({
-            "eventName" : INTEGRATION_NAME.CIBIL,
+            "integration_name" : INTEGRATION_NAME.CIBIL,
+            "api_name" : "cibil",
             "statusCode" : "400",
-            "message" : "statusCode not provided"
+            "message" : "statusCode not provided",
+            "data" : []
         })
 })
-
-// app.post('/dms', (req, res) => {
-//     console.log('DMS API called...')
-//     if(req.body.statusCode){
-//         if(req.body.eventName === INTEGRATION_NAME.DMS){
-//             res.json({
-//                 "eventName" : INTEGRATION_NAME.DMS,
-//                 "statusCode" : req.body.statusCode,
-//                 "message" : "OK"
-//             })
-//         }
-//         else {
-//             res.json({
-//                 "eventName" : INTEGRATION_NAME.DMS,
-//                 "statusCode" : req.body.statusCode,
-//                 "message" : "eventName is not Dms"
-//             })
-//         }
-//     }
-//     else
-//         res.json({
-//             "eventName" : INTEGRATION_NAME.DMS,
-//             "statusCode" : "400",
-//             "message" : "statusCode not provided"
-//         })
-// })
 
 app.post('/no-integration-name', (req, res) => {
     console.log('No-integration-name API called...')
     if(req.body.statusCode){
-        if(req.body.eventName === INTEGRATION_NAME.NO_INTEGRATION_NAME){
+        if(req.body.integration_name === INTEGRATION_NAME.NO_INTEGRATION_NAME){
             res.json({
-                "eventName" : INTEGRATION_NAME.NO_INTEGRATION_NAME,
+                "integration_name" : INTEGRATION_NAME.NO_INTEGRATION_NAME,
+                "api_name" : "no-integration-name",
                 "statusCode" : req.body.statusCode,
-                "message" : "OK"
+                "message" : "OK",
+                "data" : []
             })
         }
         else {
             res.json({
-                "eventName" : INTEGRATION_NAME.NO_INTEGRATION_NAME,
+                "integration_name" : INTEGRATION_NAME.NO_INTEGRATION_NAME,
+                "api_name" : "no-integration-name",
                 "statusCode" : req.body.statusCode,
-                "message" : "eventName is not No-integration-name"
+                "message" : "integration_name is not No-integration-name",
+                "data" : []
             })
         }
     }
     else
         res.json({
-            "eventName" : INTEGRATION_NAME.NO_INTEGRATION_NAME,
+            "integration_name" : INTEGRATION_NAME.NO_INTEGRATION_NAME,
+            "api_name" : "no-integration-name",
             "statusCode" : "400",
-            "message" : "statusCode not provided"
+            "message" : "statusCode not provided",
+            "data" : []
         })
 })
 
