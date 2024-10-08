@@ -44,22 +44,22 @@ app.post('/submit-response', (req, res) => {
     console.log('submit-response API called...')
     if(req.body.status === 'success')
         res.json({
-            "statusCode": "200",
             "api_name": "submit-response",
-            "message": "Request executed successfully"
+            "message": "Request executed successfully",
+            "original_event_data": req.body
         })
     
     else if(req.body.status === 'fail')
         res.json({
-            "statusCode": "400",
             "api_name": "submit-response",
-            "message": "Request failed"
+            "message": "Request failed",
+            "original_event_data": req.body
         })
 
     else res.json({
-        "statusCode": "400",
         "api_name": "submit-response",
-        "message": "Unknown request"
+        "message": "Unknown request",
+        "original_event_data": req.body
     })
 })
 
