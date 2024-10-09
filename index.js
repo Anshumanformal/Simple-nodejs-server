@@ -4,8 +4,10 @@ const perfiosRouter = require('./routes/perfiosRouter')
 const dmsRouter = require('./routes/dmsRouter')
 const {sendEmail} = require("./nodemailer")
 const {fetchCloudwatchLogs} = require('./fetchCloudwatchLogs')
+const cors = require('cors')
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Global Error Handling Middleware
